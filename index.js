@@ -49,7 +49,11 @@ async function loadPokemon() {
         // Obtener listado de Pokémon
         const response = await axios.get(API_URL);
 
+        console.log("Respuesta de la API:", response.data);
+
         const pokemonList = response.data.results;
+
+        console.log("Lista de Pokémon:", pokemonList);
 
         // Obtener detalles de cada Pokémon
         const pokemonDetails = await Promise.all(
@@ -58,8 +62,12 @@ async function loadPokemon() {
             )
         );
 
+        console.log("Detalles completos:", pokemonDetails);
+
         // Mostrar cards
         pokemonDetails.forEach(pokemon => {
+
+            console.log("Pokémon cargado:", pokemon.name);
 
             const card = createPokemonCard(
                 pokemon.name,
@@ -73,7 +81,7 @@ async function loadPokemon() {
 
     } catch (error) {
 
-        console.error("Error:", error);
+        console.error("Error al cargar Pokémon:", error);
 
         statusText.textContent =
             "Ocurrió un error al cargar los Pokémon.";
